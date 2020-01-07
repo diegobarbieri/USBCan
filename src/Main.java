@@ -43,6 +43,7 @@ public class Main {
     }
 
     public static void MenuMulti() {
+        //COMMENTO PROVA//
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Inserire un intervallo di numeri da testare (Estremi inclusi)...");
         System.out.println("Inserire il primo numero esadecimale compreso tra 0 e 7ff: ");
