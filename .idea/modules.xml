@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/USBCAN.iml" filepath="$PROJECT_DIR$/.idea/USBCAN.iml" />
+      <module fileurl="file://$PROJECT_DIR$/USBCAN.iml" filepath="$PROJECT_DIR$/USBCAN.iml" />
     </modules>
   </component>
 </project>
