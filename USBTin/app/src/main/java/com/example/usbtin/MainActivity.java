@@ -20,6 +20,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,13 +48,14 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_impostazioni,
+                R.id.nav_home, R.id.nav_impostazioni, R.id.nav_convertitore, R.id.nav_help,
                 R.id.nav_about)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
     }
 
     @Override
@@ -65,5 +70,33 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+
+    public void convertClick(View view){
+        Spinner mySpinner = (Spinner) findViewById(R.id.convertitore_selectFrom);
+        String conversione = mySpinner.getSelectedItem().toString();
+        if (conversione.equals("Decimale")) {
+            EditText editText = (EditText) findViewById(R.id.convertitore_input);
+            int interoDaConvertire = Integer.parseInt(editText.getText().toString());
+            convertiDecimale(interoDaConvertire);
+        }
+        else {
+            EditText editText = (EditText) findViewById(R.id.convertitore_input);
+            String hexDaConvertire = editText.getText().toString();
+            convertiEsadecimale(hexDaConvertire);
+        }
+
+    }
+    public void convertiDecimale(int number) {
+        String hex = Integer.toHexString(number);
+        TextView textView = (TextView)findViewById(R.id.convertitore_output);
+        textView.setText(hex);
+    }
+
+    public void convertiEsadecimale(String hex) {
+        int decimal=Integer.parseInt(hex,16);
+        TextView textView = (TextView)findViewById(R.id.convertitore_output);
+        textView.setText(Double.toString(decimal));
     }
 }
