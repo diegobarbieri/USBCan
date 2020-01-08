@@ -20,7 +20,7 @@ public class Main {
             case ("HELP"):
                 System.out.println("Per inserire un unico ID da testare digitare Single e seguire le indicazioni mostrate sullo schermo");
                 System.out.println("Per inserire un intervallo di ID da testare digitare Multiple e seguire le indicazioni mostrate sullo schermo");
-                System.out.println("Per ricevere i messaggi digitare Receiver");
+                System.out.println("Per ricevere i messaggi digitare Receiver, per interrompere l'ascolto premere ENTER");
                 MenuPrincipale();
                 break;
             case ("SINGLE"):
@@ -28,13 +28,15 @@ public class Main {
                 break;
             case ("MULTIPLE"):
                 MenuMulti();
+                MenuPrincipale();
                 break;
             case ("QUIT"):
                 System.out.println("Disconnesso");
                 return;
             case ("RECEIVE"):
-                receiveMessage();
                 System.out.println("Sei in ascolto...");
+                receiveMessage();
+                MenuPrincipale();
                 break;
             default:
                 System.out.println("Non hai inserito un comando valido, riprovare");
@@ -65,8 +67,8 @@ public class Main {
            for (int i = first; i <= second; i++) {
                 usbtin.send(new CANMessage(i, new byte[]{0x11, 0x22, 0x33}));
                 System.out.println("Prova Id: " +Integer.toHexString(i));
-               TimeUnit.SECONDS.sleep((long) 0.5);
-            }
+                TimeUnit.SECONDS.sleep((long) 0.5);
+           }
             usbtin.closeCANChannel();
             usbtin.disconnect();
         } catch (USBtinException | InterruptedException ex) {
