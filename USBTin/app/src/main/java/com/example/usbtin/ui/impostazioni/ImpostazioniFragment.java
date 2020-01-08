@@ -22,8 +22,8 @@ public class ImpostazioniFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         impostazioniViewModel =
                 ViewModelProviders.of(this).get(ImpostazioniViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
+        View root = inflater.inflate(R.layout.fragment_impostazioni, container, false);
+        final TextView textView = root.findViewById(R.id.text_impostazioni);
         impostazioniViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

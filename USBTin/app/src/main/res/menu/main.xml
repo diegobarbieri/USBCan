@@ -14,7 +14,7 @@
     <item
         android:id="@+id/action_clean"
         android:orderInCategory="100"
-        android:title="Ripristina"
+        android:title="Pulisci"
         app:showAsAction="never" />
 
 </menu>

@@ -13,9 +13,17 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/menu_impostazioni" />
         <item
+            android:id="@+id/nav_convertitore"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/menu_convertitore" />
+        <item
             android:id="@+id/nav_help"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_menu_manage"
             android:title="@string/menu_help" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/menu_about" />
     </group>
 
 </menu>

@@ -15,12 +15,21 @@
         android:id="@+id/nav_impostazioni"
         android:name="com.example.usbtin.ui.impostazioni.ImpostazioniFragment"
         android:label="Impostazioni"
-        tools:layout="@layout/fragment_gallery" />
-
+        tools:layout="@layout/fragment_impostazioni" />
+    <fragment
+        android:id="@+id/nav_convertitore"
+        android:name="com.example.usbtin.ui.convertitore.ConvertitoreFragment"
+        android:label="Convertitore"
+        tools:layout="@layout/fragment_convertitore" />
+    <fragment
+        android:id="@+id/nav_help"
+        android:name="com.example.usbtin.ui.help.HelpFragment"
+        android:label="Help"
+        tools:layout="@layout/fragment_help" />
     <fragment
         android:id="@+id/nav_about"
-        android:name="com.example.usbtin.ui.help.HelpFragment"
+        android:name="com.example.usbtin.ui.about.AboutFragment"
         android:label="About"
-        tools:layout="@layout/fragment_share" />
+        tools:layout="@layout/fragment_about" />
 
 </navigation>
