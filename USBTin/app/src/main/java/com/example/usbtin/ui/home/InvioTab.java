@@ -53,8 +53,8 @@ public class InvioTab extends Fragment {
         IdTo = root.findViewById(R.id.IdTo);
         invioTable = root.findViewById(R.id.tableInvio);
         currentId = root.findViewById(R.id.currentId);
-        stopButton = root.findViewById(R.id.stopButton);
-        stopButton.setEnabled(false);
+        //stopButton = root.findViewById(R.id.stopButton);
+        //stopButton.setEnabled(false);
 
         runButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -76,7 +76,7 @@ public class InvioTab extends Fragment {
             renderTable(i);
         }
         runButton.setEnabled(true);
-        stopButton.setEnabled(false);
+        //stopButton.setEnabled(false);
     }
 
     public void renderTable(int number) {
@@ -97,5 +97,10 @@ public class InvioTab extends Fragment {
         tableLine.addView(payload);
 
         invioTable.addView(tableLine);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }

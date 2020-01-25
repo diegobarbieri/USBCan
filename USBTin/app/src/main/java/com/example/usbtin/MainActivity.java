@@ -1,10 +1,13 @@
 package com.example.usbtin;
 
+import android.content.Intent;						  
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.preference.PreferenceManager;
+import android.view.MenuItem;							 
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+	    PreferenceManager.setDefaultValues(this, R.xml.preferences, false);  //PER IMPOSTAZIONI
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -118,5 +122,10 @@ public class MainActivity extends AppCompatActivity {
             System.err.println(ex);
 
         }
+    }
+	
+	public void onImpostazioni(MenuItem item){
+        Intent intent = new Intent(this, SettingActivity.class);
+        startActivity(intent);
     }
 }
