@@ -28,7 +28,6 @@ public class SettingActivity extends AppCompatActivity {
 
         String sSettingbound = prefs.getString("list_preference_rate","xxx");
         setC(sSettingbound);
-        Toast.makeText(this,getC(),Toast.LENGTH_LONG).show();
 
         String sSettingmode = prefs.getString("list_preference_mode","xxx");
         setD(sSettingmode);

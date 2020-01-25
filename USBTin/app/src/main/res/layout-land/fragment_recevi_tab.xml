@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TableLayout
-            android:id="@+id/tableInvio"
+            android:id="@+id/tableRicevi"
             android:layout_width="960dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
