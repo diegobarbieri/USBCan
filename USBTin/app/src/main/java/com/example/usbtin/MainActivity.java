@@ -1,45 +1,39 @@
 package com.example.usbtin;
 
-import android.content.Intent;						  
+import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.preference.PreferenceManager;
-import android.view.MenuItem;							 
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+import android.content.DialogInterface;
 
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import de.fischl.usbtin.USBtin;
 import de.fischl.usbtin.USBtinException;
 
-import android.view.Menu;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TableLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 
+    private static USBtin usbtin;
     private AppBarConfiguration mAppBarConfiguration;
+    private ArrayList<CANMessage> canMessageList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +76,13 @@ public class MainActivity extends AppCompatActivity {
         String conversione = mySpinner.getSelectedItem().toString();
         if (conversione.equals("Decimale")) {
             EditText editText = (EditText) findViewById(R.id.convertitore_input);
-            int interoDaConvertire = Integer.parseInt(editText.getText().toString());
-            convertiDecimale(interoDaConvertire);
+            if (editText.getText().toString().matches((".*[a-zA-Z]+.*"))){
+                alert("Errore di Input","Non hai inserito un numero valido, riprovare");
+            }
+            else{
+                int interoDaConvertire = Integer.parseInt(editText.getText().toString());
+                convertiDecimale(interoDaConvertire);
+            }
         }
         else {
             EditText editText = (EditText) findViewById(R.id.convertitore_input);
@@ -102,30 +101,84 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = (TextView)findViewById(R.id.convertitore_output);
         textView.setText(Integer.toString(decimal));
     }
-    public static void receiveMessage() {
+
+    public void onImpostazioni(MenuItem item){
+        Intent intent = new Intent(this, SettingActivity.class);
+        startActivity(intent);
+    }
+
+    public void receiveMessage(String bus, String porta, String baudRate, String modalità) {
         try {
-            // create the instances
-            USBtin usbtin = new USBtin();
-            // connect to USBtin and open CAN channel with 10kBaud in Active-Mode
-            usbtin.connect("COM3"); // Windows e.g. "COM3"
-            usbtin.openCANChannel(50000, USBtin.OpenMode.ACTIVE);
-            usbtin.addMessageListener(canmsg -> System.out.println(canmsg));
-            System.in.read();
+            usbtin = new USBtin();
+            usbtin.connect(porta);
 
-            // close the CAN channel and close the connection
-            usbtin.closeCANChannel();
-            usbtin.disconnect();
-
-        } catch (USBtinException | IOException ex) {
+            if(modalità.equals("ACTIVE")) {
+                usbtin.openCANChannel(Integer.parseInt(baudRate), USBtin.OpenMode.ACTIVE);
+            }
+            else {
+                usbtin.addMessageListener(canMessage -> {createRow(canMessage);});
+            }
+        } catch (USBtinException ex) {
 
             // Ohh.. something goes wrong while accessing/talking to USBtin
             System.err.println(ex);
 
         }
     }
-	
-	public void onImpostazioni(MenuItem item){
-        Intent intent = new Intent(this, SettingActivity.class);
-        startActivity(intent);
+
+    public void Disconnect(MenuItem item) throws USBtinException {
+        // close the CAN channel and close the connection
+        usbtin.closeCANChannel();
+        usbtin.disconnect();
+    }
+
+    public void createRow(de.fischl.usbtin.CANMessage message) {
+        TableLayout tabLayout = findViewById(R.id.tableRicevi);
+
+        TableRow.LayoutParams trParam = new TableRow.LayoutParams();
+        trParam.weight = 1;
+        TableRow tableLine = new TableRow(this);
+
+        TextView Id = new TextView(this);
+        Id.setLayoutParams(trParam);
+        Id.setText(message.getId());
+        Id.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        tableLine.addView(Id);
+
+        TextView dlc = new TextView(this);
+        dlc.setText(Integer.toString(message.hashCode()));
+        dlc.setLayoutParams(trParam);
+        dlc.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        tableLine.addView(dlc);
+
+        TextView Data = new TextView(this);
+        Data.setText(message.getData().toString());
+        Data.setLayoutParams(trParam);
+        Data.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        tableLine.addView(Data);
+
+        tabLayout.addView(tableLine);
+    }
+
+    public void cleanTable(MenuItem item) {
+        TableLayout tabLayoutRicevi = findViewById(R.id.tableRicevi);
+        TableLayout tabLayoutInvio = findViewById(R.id.tableInvio);
+        while (tabLayoutRicevi.getChildCount() > 1)
+            tabLayoutRicevi.removeView(tabLayoutRicevi.getChildAt(tabLayoutRicevi.getChildCount() - 1));
+        while (tabLayoutInvio.getChildCount() > 1)
+            tabLayoutInvio.removeView(tabLayoutInvio.getChildAt(tabLayoutInvio.getChildCount() - 1));
+    }
+
+    public void alert(String title, String body) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(body);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 }

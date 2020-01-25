@@ -10,11 +10,13 @@
         android:id="@+id/action_disconnect"
         android:orderInCategory="100"
         android:title="Disconnetti"
+        android:onClick="Disconnect"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_clean"
         android:orderInCategory="100"
         android:title="Pulisci"
+        android:onClick="cleanTable"
         app:showAsAction="never" />
 
 </menu>

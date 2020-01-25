@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.example.usbtin.R;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +34,7 @@ public class InvioTab extends Fragment {
     private EditText IdTo;
     private TextView currentId;
     private TableLayout invioTable;
+    private EditText msgStep;
 
     public InvioTab() {
         // Required empty public constructor
@@ -53,30 +56,37 @@ public class InvioTab extends Fragment {
         IdTo = root.findViewById(R.id.IdTo);
         invioTable = root.findViewById(R.id.tableInvio);
         currentId = root.findViewById(R.id.currentId);
-        //stopButton = root.findViewById(R.id.stopButton);
-        //stopButton.setEnabled(false);
+        stopButton = root.findViewById(R.id.stopButton);
+        msgStep = root.findViewById(R.id.msgStep);
+        stopButton.setEnabled(false);
 
         runButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                createRow(IdFrom.getText().toString(),IdTo.getText().toString());
+                cleanTable();
+                if (msgStep.getText().toString().equals("")){
+                    msgStep.setText("1");
+                }
+                createRow(IdFrom.getText().toString(),IdTo.getText().toString(), Integer.parseInt(msgStep.getText().toString()));
             }
         });
 
         return root;
     }
 
-    public void createRow(String IdFrom, String IdTo) {
+    public void createRow(String IdFrom, String IdTo, int times) {
         runButton.setEnabled(false);
         stopButton.setEnabled(true);
         int first = Integer.parseInt(IdFrom,16);
         int second = Integer.parseInt(IdTo,16);
 
         for (int i = first; i <= second; i++) {
-            currentId.setText(String.valueOf(i));
-            renderTable(i);
-        }
+            currentId.setText(Integer.toHexString(i));
+            for(int j=0; j<times;j++) {
+                renderTable(i);
+            }
         runButton.setEnabled(true);
-        //stopButton.setEnabled(false);
+        stopButton.setEnabled(false);
+        }
     }
 
     public void renderTable(int number) {
@@ -86,7 +96,7 @@ public class InvioTab extends Fragment {
 
         TextView tableId = new TextView(getContext());
         tableId.setLayoutParams(trParam);
-        tableId.setText(String.valueOf(number));
+        tableId.setText(Integer.toHexString(number));
         tableId.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         tableLine.addView(tableId);
 
@@ -97,6 +107,11 @@ public class InvioTab extends Fragment {
         tableLine.addView(payload);
 
         invioTable.addView(tableLine);
+    }
+
+    public void cleanTable() {
+        while (invioTable.getChildCount() > 1)
+            invioTable.removeView(invioTable.getChildAt(invioTable.getChildCount() - 1));
     }
 
     @Override
