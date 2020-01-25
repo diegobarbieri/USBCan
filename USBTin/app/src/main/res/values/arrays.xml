@@ -7,6 +7,6 @@
 
     <string-array name="convertitore_secondValue">
         <item>Esadecimale</item>
-        <item>Decimale States</item>
+        <item>Decimale</item>
     </string-array>
 </resources>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.InvioTab">
+
+
+    <EditText
+        android:id="@+id/IdFrom"
+        android:layout_width="117dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="28dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.358" />
+
+    <TextView
+        android:id="@+id/from"
+        android:layout_width="60dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="1dp"
+        android:text="From"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableInvio" />
+
+    <TextView
+        android:id="@+id/to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="340dp"
+        android:text="To"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableInvio"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/IdTo"
+        android:layout_width="117dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="316dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.357" />
+
+    <TextView
+        android:id="@+id/currentId"
+        android:layout_width="117dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="172dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.356" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="62dp"
+        android:layout_height="20dp"
+        android:text="Current"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.319" />
+
+    <Button
+        android:id="@+id/InviaButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="16dp"
+        android:text="Invia"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableInvio" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="97dp"
+        android:layout_height="19dp"
+        android:layout_marginEnd="52dp"
+        android:text="Msg per Step"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableInvio" />
+
+    <TableLayout
+        android:id="@+id/tableInvio"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="20dp"
+                android:layout_column="0"
+                android:layout_weight="1"
+                android:text=" ID" />
+
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="20dp"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:text=" Payload" />
+
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="20dp"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:text=" Recurrence" />
+        </TableRow>
+    </TableLayout>
+
+    <EditText
+        android:id="@+id/msgStep"
+        android:layout_width="77dp"
+        android:layout_height="36dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.356" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

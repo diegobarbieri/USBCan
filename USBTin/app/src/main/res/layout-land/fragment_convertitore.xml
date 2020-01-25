@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/menu_convertitore"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/convertitore_selectFrom"
+            android:layout_width="178dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="12dp"
+            android:entries="@array/convertitore_firstValue"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toStartOf="@+id/convertitore_selectTo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_share" />
+
+        <Spinner
+            android:id="@+id/convertitore_selectTo"
+            android:layout_width="177dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="28dp"
+            android:entries="@array/convertitore_secondValue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/convertitore_selectFrom"
+            app:layout_constraintTop_toBottomOf="@+id/text_share" />
+
+        <TextView
+            android:id="@+id/title_convert_da"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="204dp"
+            android:layout_marginBottom="12dp"
+            android:text="@string/label_convertitoreFrom"
+            app:layout_constraintBottom_toTopOf="@+id/convertitore_selectFrom"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/title_convert_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="372dp"
+            android:layout_marginBottom="12dp"
+            android:text="@string/label_convertitoreTo"
+            app:layout_constraintBottom_toTopOf="@+id/convertitore_selectTo"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="46dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/label_convertitoreFrom"
+            app:layout_constraintBottom_toTopOf="@+id/convertitore_input"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.472"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+        <EditText
+            android:id="@+id/convertitore_input"
+            android:layout_width="191dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginEnd="52dp"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="Numero da Convertire"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:labelFor="@id/convertitore_input"
+            app:layout_constraintBottom_toTopOf="@+id/textView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="38dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/label_convertitoreTo"
+            app:layout_constraintBottom_toTopOf="@+id/convertitore_output"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.471"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/convertitore_input" />
+
+        <TextView
+            android:id="@+id/convertitore_output"
+            android:layout_width="195dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="52dp"
+            android:ems="10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="32dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toTopOf="@+id/textView4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/convertitore_selectFrom" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="200dp"
+            android:gravity="center"
+            android:onClick="convertClick"
+            android:text="@string/button_converti"
+            app:layout_constraintStart_toEndOf="@+id/convertitore_output"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

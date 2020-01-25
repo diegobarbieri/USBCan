@@ -18,12 +18,21 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import de.fischl.usbtin.USBtin;
+import de.fischl.usbtin.USBtinException;
 
 import android.view.Menu;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,14 +44,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -55,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
     }
 
     @Override
@@ -86,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
             String hexDaConvertire = editText.getText().toString();
             convertiEsadecimale(hexDaConvertire);
         }
-
     }
     public void convertiDecimale(int number) {
         String hex = Integer.toHexString(number);
@@ -97,6 +96,27 @@ public class MainActivity extends AppCompatActivity {
     public void convertiEsadecimale(String hex) {
         int decimal=Integer.parseInt(hex,16);
         TextView textView = (TextView)findViewById(R.id.convertitore_output);
-        textView.setText(Double.toString(decimal));
+        textView.setText(Integer.toString(decimal));
+    }
+    public static void receiveMessage() {
+        try {
+            // create the instances
+            USBtin usbtin = new USBtin();
+            // connect to USBtin and open CAN channel with 10kBaud in Active-Mode
+            usbtin.connect("COM3"); // Windows e.g. "COM3"
+            usbtin.openCANChannel(50000, USBtin.OpenMode.ACTIVE);
+            usbtin.addMessageListener(canmsg -> System.out.println(canmsg));
+            System.in.read();
+
+            // close the CAN channel and close the connection
+            usbtin.closeCANChannel();
+            usbtin.disconnect();
+
+        } catch (USBtinException | IOException ex) {
+
+            // Ohh.. something goes wrong while accessing/talking to USBtin
+            System.err.println(ex);
+
+        }
     }
 }

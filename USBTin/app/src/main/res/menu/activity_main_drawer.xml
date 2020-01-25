@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_launcher_home_icon"
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_impostazioni"
@@ -14,15 +14,15 @@
             android:title="@string/menu_impostazioni" />
         <item
             android:id="@+id/nav_convertitore"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_launcher_converter_icon"
             android:title="@string/menu_convertitore" />
         <item
             android:id="@+id/nav_help"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_launcher_help_icon"
             android:title="@string/menu_help" />
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_launcher_about_icon"
             android:title="@string/menu_about" />
     </group>
 

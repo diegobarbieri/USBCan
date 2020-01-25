@@ -23,13 +23,6 @@ public class ConvertitoreFragment extends Fragment {
         convertitoreViewModel =
                 ViewModelProviders.of(this).get(ConvertitoreViewModel.class);
         View root = inflater.inflate(R.layout.fragment_convertitore, container, false);
-        final TextView textView = root.findViewById(R.id.text_share);
-        convertitoreViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
 }
