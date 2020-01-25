@@ -1,6 +1,7 @@
 package com.example.usbtin;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.content.DialogInterface;
 
+import com.example.usbtin.ui.SettingsAttributes;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
@@ -35,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ArrayList<CANMessage> canMessageList;
 
+    private SettingsAttributes settingsAttributes = new SettingsAttributes();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +59,24 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        //CODICE GET SET DA LISTE IMPOSTAZIONI ---------------------------------
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String sSettingbus = prefs.getString("list_preference_bus","xxx");
+        settingsAttributes.setBus(sSettingbus);
+
+        String sSettingCOM = prefs.getString("list_preference_com","xxx");
+        settingsAttributes.setCom(sSettingCOM);
+
+        String sSettingbound = prefs.getString("list_preference_rate","xxx");
+        settingsAttributes.setRate(sSettingbound);
+        //     Toast.makeText(this,getRate(),Toast.LENGTH_LONG).show();
+
+        String sSettingmode = prefs.getString("list_preference_mode","xxx");
+        settingsAttributes.setMode(sSettingmode);
+
+        //CODICE GET SET DA LISTE IMPOSTAZIONI -------------------------------------------
     }
 
     @Override
@@ -181,4 +204,30 @@ public class MainActivity extends AppCompatActivity {
                 });
         alertDialog.show();
     }
+
+
+    //-------PULSANTE CONNTETTI---------------------------------------------------
+    public void onConnetti(MenuItem menu){
+        String busConn= settingsAttributes.getBus();
+        String comConn= settingsAttributes.getCom();
+        String rateConn = settingsAttributes.getRate();
+        String modConn = settingsAttributes.getMode();
+
+        if(busConn.equals("DAIMP") || busConn.equals("DAIMP") || busConn.equals("DAIMP") || busConn.equals("DAIMP")){
+            //    Intent intent = new Intent(this, SettingActivity.class);
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle("Campi non settati");
+            alertDialog.setMessage("Imposta i campi nel menu impostazioni");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+
+                    });
+            alertDialog.show();
+        }
+    }
+    //-----------------------------------------------------------------------------
+
 }
