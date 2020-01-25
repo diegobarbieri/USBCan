@@ -6,7 +6,7 @@
 
     <ListPreference
         android:id="@+id/busid"
-        android:defaultValue="1"
+        android:defaultValue="DAIMP"
         android:entries="@array/bus"
         android:entryValues="@array/bus"
         android:key="list_preference_bus"
@@ -14,21 +14,21 @@
         android:title="BUS utilizzato" />
     <ListPreference
         android:id="@+id/comid"
-        android:defaultValue="1"
+        android:defaultValue="DAIMP"
         android:entries="@array/com"
         android:entryValues="@array/com"
         android:key="list_preference_com"
         android:title="Porta COM" />
     <ListPreference
         android:id="@+id/conrate"
-        android:defaultValue="2"
+        android:defaultValue="DAIMP"
         android:entries="@array/connessione_rate"
         android:entryValues="@array/connessione_rate"
         android:key="list_preference_rate"
         android:title="Bound Rate" />
     <ListPreference
         android:id="@+id/conid"
-        android:defaultValue="1"
+        android:defaultValue="DAIMP"
         android:entries="@array/mode"
         android:entryValues="@array/mode"
         android:key="list_preference_mode"
